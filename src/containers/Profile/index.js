@@ -5,7 +5,6 @@ class Profile extends Component {
   render() {
     let posts = this.props.posts;
     //let login = this.props.login;
-
     //let _this = this;
 
     if (!posts) {
