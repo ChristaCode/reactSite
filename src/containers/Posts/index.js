@@ -42,6 +42,7 @@ class Posts extends Component {
                 <div>Posted By: { posts[key].postedBy }</div>
                 <div>Upvotes: { posts[key].upvote }</div>
                 <div>Downvotes: { posts[key].downvote }</div>
+                <div>Type: { posts[key].type }</div>
                 <div>
                   <button 
                     onClick={ _this.handleUpvote.bind(this, posts[key], key) }

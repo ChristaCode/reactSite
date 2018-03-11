@@ -8,8 +8,8 @@ class uploadPic extends Component {
     isUploading: false,
     progress: 0,
     imageURL: ''
-  };
- 
+  };  
+
   handleUploadStart = () => this.setState({isUploading: true, progress: 0});
   handleProgress = (progress) => this.setState({progress});
   handleUploadError = (error) => {
@@ -19,10 +19,22 @@ class uploadPic extends Component {
   handleUploadSuccess = (filename) => {
     this.setState({image: filename, progress: 100, isUploading: false});
     firebase.storage().ref('').child(filename).getDownloadURL().then(url => this.setState({imageURL: url}));
+    this.props.firebase.ref('posts').push({
+      title: filename,
+      upvote: 0,
+      downvote: 0,
+      type: 'image',
+      postedBy: ''
+    });
   };
  
   render() {
     debugger;
+
+    //hack for generating unique photo filenames
+    var randomNumForFilename = Math.floor(Math.random() * 10000);
+    var timestamp = Math.floor(Date.now() /1000);
+
     return (
       <div>
         <form>
@@ -36,7 +48,7 @@ class uploadPic extends Component {
           <FileUploader
             accept="image/*"
             name="image"
-            filename={file => this.props.memberName }
+            filename={timestamp + '+' + randomNumForFilename}
             storageRef={firebase.storage().ref('')}
             onUploadStart={this.handleUploadStart}
             onUploadError={this.handleUploadError}

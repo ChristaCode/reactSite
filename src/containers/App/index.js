@@ -13,6 +13,7 @@ class App extends Component {
 
   state = {
     posts: [],
+    images: [],
     loading: true
   };
 
@@ -36,6 +37,7 @@ class App extends Component {
           // https://github.com/ReactTraining/react-router/blob/v3/examples/passing-props-to-children/app.js#L56-L58
           firebase: firebase.database(),
           posts: this.state.posts,
+          images: this.state.images,
           loading: this.state.loading
         })}
       </div>
